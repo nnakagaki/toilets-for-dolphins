@@ -1,0 +1,95 @@
+/*
+ * This is a manifest file that'll be compiled into application.css, which will include all the files
+ * listed below.
+ *
+ * Any CSS and SCSS file within this directory, lib/assets/stylesheets, vendor/assets/stylesheets,
+ * or vendor/assets/stylesheets of plugins, if any, can be referenced here using a relative path.
+ *
+ * You're free to add application-wide styles to this file and they'll appear at the top of the
+ * compiled file, but it's generally better to create a new file per style scope.
+ *
+ *= require_self
+ *= require_tree .
+ */
+
+@import "bootstrap-sprockets";
+@import "bootstrap";
+
+
+body {
+  position: relative;
+}
+
+#nav-dropdown button {
+  margin-top: 13px;
+  color: grey;
+  background: transparent;
+  border-radius: 4px;
+  border: none;
+  margin-left: 8px;
+
+}
+
+.sign-in-out {
+  float: right;
+}
+
+#signed-in {
+  margin-top: 15px;
+  font-weight: bold;
+}
+
+.home-sidebar {
+  right: 40px;
+  top: 110px;
+  position: fixed;
+}
+
+.home-sidebar ul li.active a {
+  color: purple;
+}
+
+.home-page {
+  padding-right: 40px;
+  border-right: 5px solid #0040FF;
+}
+
+.about-toilets li {
+  height: 90px;
+  font-size: 200%;
+}
+
+img {
+  width: 100%;
+  height: 100%;
+}
+
+.dolphins div {
+  height: 200px;
+  position: relative;
+}
+
+.dolphins h2 {
+  position: absolute;
+  bottom: 0;
+  padding: 5px;
+  background: lightblue;
+  border: 2px solid blue;
+  border-radius: 5px;
+  left: -5%;
+}
+
+.dolphins p {
+  margin-top: 10px;
+}
+
+#dolphin-carousel {
+  height: 280px;
+}
+
+.carousel-inner {
+  height: 280px;
+}
+
+
+

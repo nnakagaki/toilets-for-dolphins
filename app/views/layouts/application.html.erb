@@ -1,0 +1,131 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <%= stylesheet_link_tag 'application' %>
+    <%= javascript_include_tag 'application' %>
+    <%= csrf_meta_tags %>
+    <title>NewAuthDemo</title>
+  </head>
+  <body data-spy="scroll" data-target=".home-sidebar">
+
+    <nav class="navbar navbar-default">
+      <div class="navbar-header">
+        <button type="button" class="navbar-toggle collapsed"
+        data-toggle="collapse"
+        data-target="#bs-example-navbar-collapse-1">
+          Hmm
+        </button>
+      </div>
+      <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+        <div class="sign-in-out nav navbar-nav">
+          <% if signed_in? %>
+            <li id="signed-in">Signed in as: <%= current_user.username %></li>
+            <li><%= link_to "Sign Out", session_url, :method => :delete %></li>
+            <% else %>
+            <li>
+              <a href="#"
+                 data-toggle="modal"
+                 data-target="#signin-modal">
+                 Sign In
+              </a>
+              <!-- <%# render "sessions/new.html.erb" %> -->
+            </li>
+            <li><%= link_to "Sign up", new_user_url %> </li>
+          <% end %>
+        </div>
+        <div class="nav navbar-nav">
+          <li><a href="<%= home_url %>">Home</a></li>
+          <li><a href="<%= contact_url %>">Contact</a></li>
+          <li><a href="<%= about_url %>">About</a></li>
+          <li id="nav-dropdown">
+            <div class="dropdown">
+              <button class="btn btn-default dropdown-toggle" type="button"
+              id="nav-dropdown-menu" data-toggle="dropdown">
+                Toilets
+                <span class="caret"></span>
+              </button>
+              <ul class="dropdown-menu" role="menu"
+              aria-labelledby="nav-dropdown-menu">
+                <li role="presentation">
+                  <a role="menuitem"
+                    tabindex="-1" href="#">
+                      American
+                  </a>
+                </li>
+                <li role="presentation">
+                  <a role="menuitem"
+                    tabindex="-1" href="#">
+                      German
+                  </a>
+                </li>
+                <li role="presentation">
+                  <a role="menuitem"
+                    tabindex="-1" href="#">
+                      English
+                  </a>
+                </li>
+                <li role="presentation">
+                  <a role="menuitem"
+                    tabindex="-1" href="#">
+                      Russian
+                  </a>
+                </li>
+              </ul>
+            </div>
+          </li>
+        </div>
+      </div>
+    </nav>
+    <hr>
+
+    <div id="alerts"></div>
+
+    <% if flash[:errors] %>
+    <h3>Please fix the following errors:</h3>
+    <ul>
+      <% flash[:errors].each do |error| %>
+      <li><%= error %></li>
+      <% end %>
+    </ul>
+    <% end %>
+    <div class="container">
+      <%= yield %>
+    </div>
+
+    <script>
+      $('form.contact-form').on("click", "input.btn", function(event){
+        errorHandle("email");
+        errorHandle("full-name");
+        isSuccessfull("#contact-us");
+      });
+
+      var errorHandle = function (inputField) {
+        var field = $('.contact-form #' + inputField);
+
+        $("form div." + inputField).removeClass("has-success has-error");
+
+        if (field.val()) {
+          $("form div." + inputField).addClass("has-success");
+        } else {
+          $("form div." + inputField).addClass("has-error");
+        }
+      }
+
+      var isSuccessfull = function (formName) {
+        console.log($(formName + " .has-error"));
+
+
+       if($(formName + " .has-error").length > 0) {
+         $("div#alerts").html("<div class='alert alert-danger' role='alert'>failure</div>");
+       }else {
+          $("div#alerts").html("<div class='alert alert-success' role='alert'>success</div>");
+       }
+
+      }
+
+      $('.tooltip-ex').tooltip();
+      $('body').scrollspy({ target: '.home-sidebar' });
+    </script>
+
+  </body>
+</html>
